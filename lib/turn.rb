@@ -48,4 +48,18 @@ class Turn
           mad_result
         end
      end
+
+     def pile_cards
+        if type == :basic
+            @spoils_of_war << player1.deck.remove_card
+            @spoils_of_war << player2.deck.remove_card
+        elsif type == :war
+            3.times do 
+                @spoils_of_war << player1.deck.remove_card
+                @spoils_of_war << player2.deck.remove_card
+            end
+        else
+
+        end
+     end
 end
