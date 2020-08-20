@@ -205,6 +205,7 @@ class TurnTest <Minitest::Test
     end
 
     def test_can_it_award_spoils
+        #basic game
         card1 = Card.new(:heart, 'Jack', 11)
         card2 = Card.new(:heart, '10', 10)
         card3 = Card.new(:heart, '9', 9)
@@ -231,5 +232,8 @@ class TurnTest <Minitest::Test
 
         assert_equal [card2, card5, card8, card1, card3], player1.deck.cards
 
+        #war game
+
+        #MAD game
     end
 end

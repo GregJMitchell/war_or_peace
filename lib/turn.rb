@@ -65,4 +65,19 @@ class Turn
             end
         end
      end
+
+     def award_spoils(winner)
+        case winner
+        when @player1.deck
+            @spoils_of_war.each do |card|
+                @player1.deck.add_card(card)
+            end
+        when @player2.deck
+            @spoils_of_war.each do |card|
+                @player2.deck.add_card(card)
+            end
+        else
+            @spoils_of_war = []
+        end
+     end
 end
