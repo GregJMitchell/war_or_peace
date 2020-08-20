@@ -59,7 +59,10 @@ class Turn
                 @spoils_of_war << player2.deck.remove_card
             end
         else
-
+            3.times do
+                player1.deck.remove_card
+                player2.deck.remove_card
+            end
         end
      end
 end
