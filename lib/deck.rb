@@ -18,7 +18,7 @@ class Deck
 
   def percent_high_ranking
     percent_high = (high_ranking_cards.length.to_f / @cards.length) * 100
-    percent_high
+    percent_high.round(2)
   end
 
   def remove_card
