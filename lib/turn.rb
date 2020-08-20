@@ -15,4 +15,18 @@ class Turn
             :mutually_assured_destruction
         end
      end
+
+     def find_winner_basic
+        if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
+            @player1
+        elsif @player1.deck.rank_of_card_at(0) < @player2.deck.rank_of_card_at(0)
+            @player2
+        end
+     end
+
+     def winner
+        if type == :basic
+            find_winner_basic
+        end
+     end
 end
