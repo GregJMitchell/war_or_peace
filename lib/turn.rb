@@ -7,29 +7,33 @@ class Turn
      end
 
      def type
+        return :mutually_assured_destruction if deck_is_less_than_3?
         if @player1.deck.rank_of_card_at(0) != @player2.deck.rank_of_card_at(0)
             :basic
-        elsif @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0) &&
-              @player1.deck.rank_of_card_at(2) != @player2.deck.rank_of_card_at(2)
-            :war
-        else
+        elsif @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0) && @player1.deck.rank_of_card_at(2) == @player2.deck.rank_of_card_at(2) 
             :mutually_assured_destruction
+        elsif @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0) 
+            :war
         end
+     end
+
+     def deck_is_less_than_3?
+        @player1.deck.cards.length < 3 || player2.deck.cards.length < 3
      end
 
      def find_winner_basic
         if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
-            @player1.deck
+            @player1
         elsif @player1.deck.rank_of_card_at(0) < @player2.deck.rank_of_card_at(0)
-            @player2.deck
+            @player2
         end
      end
 
      def find_winner_war
         if @player1.deck.rank_of_card_at(2) > @player2.deck.rank_of_card_at(2)
-            @player1.deck
+            @player1
         elsif @player1.deck.rank_of_card_at(2) < @player2.deck.rank_of_card_at(2)
-            @player2.deck
+            @player2
         end
      end
 
@@ -44,7 +48,7 @@ class Turn
             find_winner_basic
         when :war
             find_winner_war
-        else
+        when :mutually_assured_destruction
           mad_result
         end
      end
@@ -60,24 +64,19 @@ class Turn
             end
         else
             3.times do
-                player1.deck.remove_card
-                player2.deck.remove_card
+                @spoils_of_war << player1.deck.remove_card
+                @spoils_of_war << player2.deck.remove_card
             end
         end
      end
 
      def award_spoils(winner)
-        case winner
-        when @player1.deck
-            @spoils_of_war.each do |card|
-                @player1.deck.add_card(card)
-            end
-        when @player2.deck
-            @spoils_of_war.each do |card|
-                @player2.deck.add_card(card)
-            end
-        else
+        if winner == "No Winner"
             @spoils_of_war = []
+            return
+        end
+        @spoils_of_war.each do |card|
+            winner.deck.add_card(card)
         end
      end
 end

@@ -117,7 +117,7 @@ class TurnTest <Minitest::Test
         player2 = Player.new("Aurora", deck2)
         turn = Turn.new(player1, player2)
 
-        assert_equal player1.deck, turn.winner
+        assert_equal player1.name, turn.winner.name
         
         #war turn
         deck1 = Deck.new([card1, card2, card5, card8])
@@ -126,7 +126,7 @@ class TurnTest <Minitest::Test
         player2 = Player.new("Aurora", deck2)
         turn2 = Turn.new(player1, player2)
 
-        assert_equal player2.deck, turn2.winner
+        assert_equal player2.name, turn2.winner.name
 
         #MAD turn
         card1 = Card.new(:heart, 'Jack', 11)
