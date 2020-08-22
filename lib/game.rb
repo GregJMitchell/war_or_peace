@@ -11,7 +11,7 @@ class Game
 
     def create_decks
         suits = [:diamond, :club, :heart, :spade]
-        @big_deck ||= []
+        @big_deck = []
 
         suits.each do |suit|
             2.upto(14) do |number|
@@ -43,12 +43,6 @@ class Game
         puts "------------------------------------------------------------------"
     end
 
-    def user_start_game
-        input = gets.chomp
-        input.capitalize
-        input.capitalize
-    end
-
     def turn_messages(turn)
         case turn.type
         when :basic, :war
@@ -63,18 +57,31 @@ class Game
             turn.pile_cards
             puts "Turn #{@turn_count}: *mutually assured destruction* #{spoils} cards removed from play"
         end
-        
+    end
+
+    def determine_game_winner
+        if @player1.has_lost?
+            return @player1
+        elsif @player2.has_lost?
+            return @player2
+        end
     end
 
     def run_turns
-        while @player1.deck.cards.length != 0 && @player2.deck.cards.length != 0
+        while @player1.has_lost? == false && @player2.has_lost? == false
+            break if @player1.has_lost? || @player2.has_lost?
+
             if @turn_count <= 999999
                 turn = Turn.new(@player1, @player2)
                 turn_messages(turn)
             else
+                puts '---- DRAW ----'
                 break
             end
         end
+        winner = determine_game_winner
+            puts "*~*~*~* #{winner.name} has won the game! *~*~*~*"
+        
     end
 
     def start
