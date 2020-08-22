@@ -39,4 +39,5 @@ class ClassTest <Minitest::Test
         assert_equal "Megan", game.player1.name
         assert_equal "Aurora", game.player2.name
     end
+    
 end

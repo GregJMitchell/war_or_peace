@@ -8,4 +8,6 @@ require './lib/game'
 
 game = Game.new
 
+# game.create_decks
+# puts game.big_deck.length
 game.start
