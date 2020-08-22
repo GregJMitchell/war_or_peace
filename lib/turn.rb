@@ -19,17 +19,17 @@ class Turn
 
      def find_winner_basic
         if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
-            @player1.deck
+            @player1
         elsif @player1.deck.rank_of_card_at(0) < @player2.deck.rank_of_card_at(0)
-            @player2.deck
+            @player2
         end
      end
 
      def find_winner_war
         if @player1.deck.rank_of_card_at(2) > @player2.deck.rank_of_card_at(2)
-            @player1.deck
+            @player1
         elsif @player1.deck.rank_of_card_at(2) < @player2.deck.rank_of_card_at(2)
-            @player2.deck
+            @player2
         end
      end
 
@@ -68,11 +68,11 @@ class Turn
 
      def award_spoils(winner)
         case winner
-        when @player1.deck
+        when @player1
             @spoils_of_war.each do |card|
                 @player1.deck.add_card(card)
             end
-        when @player2.deck
+        when @player2
             @spoils_of_war.each do |card|
                 @player2.deck.add_card(card)
             end
