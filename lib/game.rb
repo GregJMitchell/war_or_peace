@@ -68,9 +68,12 @@ class Game
 
     def run_turns
         while @player1.deck.cards.length != 0 && @player2.deck.cards.length != 0
-            turn = Turn.new(@player1, @player2)
-            turn_messages(turn)
-            
+            if @turn_count <= 999999
+                turn = Turn.new(@player1, @player2)
+                turn_messages(turn)
+            else
+                break
+            end
         end
     end
 
