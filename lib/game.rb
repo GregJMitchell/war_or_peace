@@ -55,6 +55,7 @@ class Game
             @turn_count += 1
             turn.pile_cards
             spoils = turn.spoils_of_war.length
+            turn.award_spoils(turn.winner)
             puts "Turn #{@turn_count}: *mutually assured destruction* #{spoils} cards removed from play"
 
         end
@@ -62,9 +63,9 @@ class Game
 
     def determine_game_winner
         if @player1.has_lost?
-            return @player1
-        elsif @player2.has_lost?
             return @player2
+        elsif @player2.has_lost?
+            return @player1
         end
     end
 
