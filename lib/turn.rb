@@ -7,7 +7,8 @@ class Turn
      end
 
      def type
-        return :mutually_assured_destruction if deck_is_less_than_3?
+        return :mutually_assured_destruction if deck_is_less_than_3? && @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)
+        return :war if deck_is_less_than_3? &&  @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)
         if @player1.deck.rank_of_card_at(0) != @player2.deck.rank_of_card_at(0)
             :basic
         elsif @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0) && @player1.deck.rank_of_card_at(2) == @player2.deck.rank_of_card_at(2) 
@@ -19,6 +20,10 @@ class Turn
 
      def deck_is_less_than_3?
         @player1.deck.cards.length < 3 || player2.deck.cards.length < 3
+     end
+
+     def find_winner_less_than_3_cards
+        @player1.deck.cards.length < 3 ?  @player2 : @player1
      end
 
      def find_winner_basic
@@ -47,6 +52,7 @@ class Turn
         when :basic
             find_winner_basic
         when :war
+            return find_winner_less_than_3_cards if deck_is_less_than_3?
             find_winner_war
         when :mutually_assured_destruction
           mad_result
