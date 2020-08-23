@@ -57,7 +57,6 @@ class Game
             spoils = turn.spoils_of_war.length
             turn.award_spoils(turn.winner)
             puts "Turn #{@turn_count}: *mutually assured destruction* #{spoils} cards removed from play"
-
         end
     end
 
@@ -93,6 +92,7 @@ class Game
             run_turns
         else
             p "Invalid Input"
+            start
         end
     end
 end
