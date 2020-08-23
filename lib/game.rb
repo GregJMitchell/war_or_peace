@@ -1,3 +1,8 @@
+require './lib/deck'
+require './lib/card'
+require './lib/player'
+require './lib/turn'
+
 class Game
     attr_reader :big_deck, :deck1, :deck2, :player1, :player2, :turn_count
     def initialize
@@ -11,7 +16,6 @@ class Game
 
     def create_decks
         suits = [:diamond, :club, :heart, :spade]
-        @big_deck = []
 
         suits.each do |suit|
             2.upto(14) do |number|
@@ -28,6 +32,10 @@ class Game
                 end
             end
         end
+        shuffle_deck
+    end
+
+    def shuffle_deck
         @big_deck.shuffle!
         @deck1 = Deck.new(@big_deck[0..25])
         @deck2 = Deck.new(@big_deck[26..52])
@@ -49,15 +57,15 @@ class Game
             winner = turn.winner
             @turn_count += 1
             turn.pile_cards
-            puts "Turn #{@turn_count}: #{winner.name} won #{turn.spoils_of_war.length} cards"
             turn.award_spoils(winner)
+            p "Turn #{@turn_count}: #{winner.name} won #{turn.spoils_of_war.length} cards"
         when :mutually_assured_destruction
             winner = turn.winner
             @turn_count += 1
             turn.pile_cards
             spoils = turn.spoils_of_war.length
             turn.award_spoils(winner)
-            puts "Turn #{@turn_count}: *mutually assured destruction* #{spoils} cards removed from play"
+            p "Turn #{@turn_count}: *mutually assured destruction* #{spoils} cards removed from play"
         end
     end
 
