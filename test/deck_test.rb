@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/card'
 require './lib/deck'
 
-class DeckTest <Minitest::Test
+class DeckTest < Minitest::Test
   def test_it_exists
     deck = Deck.new([])
 
@@ -17,7 +17,7 @@ class DeckTest <Minitest::Test
 
     assert_equal [card1], deck.cards
   end
-  
+
   def test_it_can_find_rank
     card1 = Card.new(:diamond, 'Queen', 12)
     cards = [card1]
@@ -33,7 +33,6 @@ class DeckTest <Minitest::Test
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
 
-
     assert_equal [card1, card3], deck.high_ranking_cards
   end
 
@@ -43,7 +42,7 @@ class DeckTest <Minitest::Test
     card3 = Card.new(:heart, 'Ace', 14)
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
-    
+
     assert_equal 66.67, deck.percent_high_ranking
   end
 
